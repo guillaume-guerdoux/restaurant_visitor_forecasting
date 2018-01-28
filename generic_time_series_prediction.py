@@ -39,11 +39,11 @@ look_back = 3
 x_train, y_train = create_dataset(train, look_back)
 x_test, y_test = create_dataset(test, look_back)
 
-x_train = np.reshape(x_train, (x_train.shape[0], 1, 3))
-x_test = np.reshape(x_test, (x_test.shape[0], 1, 3))
+x_train = np.reshape(x_train, (x_train.shape[0], 3, 1))
+x_test = np.reshape(x_test, (x_test.shape[0], 3, 1))
 
 model = Sequential()
-model.add(LSTM(4, input_shape=(1, look_back)))
+model.add(LSTM(4, input_shape=(look_back, 1)))
 model.add(Dense(1))
 model.compile(loss="mean_squared_error", optimizer="adam", metrics=["accuracy"])
 model.fit(x_train, y_train, epochs=30, batch_size=1, verbose=2)
