@@ -35,12 +35,12 @@ def create_dataset(dataset, look_back):
         y_data.append(dataset[i + look_back, 0])
     return np.array(x_data), np.array(y_data)
 
-look_back = 1
+look_back = 3
 x_train, y_train = create_dataset(train, look_back)
 x_test, y_test = create_dataset(test, look_back)
 
-x_train = np.reshape(x_train, (x_train.shape[0], 1, 1))
-x_test = np.reshape(x_test, (x_test.shape[0], 1, 1))
+x_train = np.reshape(x_train, (x_train.shape[0], 1, 3))
+x_test = np.reshape(x_test, (x_test.shape[0], 1, 3))
 
 model = Sequential()
 model.add(LSTM(4, input_shape=(1, look_back)))
@@ -61,7 +61,7 @@ testPredictPlot = np.empty_like(dataset)
 testPredictPlot[:, :] = np.nan
 testPredictPlot[len(trainPredict)+(look_back*2):len(dataset), :] = testPredict
 # plot baseline and predictions
-plt.plot(dataset)
+'''plt.plot(dataset)
 plt.plot(trainPredictPlot)
 plt.plot(testPredictPlot)
-plt.show()
+plt.show()'''
